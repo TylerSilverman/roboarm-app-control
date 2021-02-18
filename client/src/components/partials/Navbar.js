@@ -7,7 +7,7 @@ const Navbar = props => {
       <nav className="z-depth-0">
         <div className="nav-wrapper white">
           <Link to="/" className="col s5 brand-logo center black-text" style={{ fontFamily: 'monospace' }}>
-            <i className="material-icons">code</i> MERN
+            <i className="material-icons">code</i> RoboArm
           </Link>
         </div>
       </nav>

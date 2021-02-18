@@ -8,31 +8,31 @@ const Landing = props => {
   console.log({ state, props });
 
   return (
-    <div className="container valign-wrapper" style={{ height: '75vh' }}>
+    <div className="container black valign-wrapper " style={{ height: '80vh' }}>
       <div className="row">
         <div className="col s12 center-align">
-          <h4>
-            <b>Build</b> a login/auth app with the {' '} <span style={{ fontFamily: 'monospace' }}>MERN</span> stack
-            from scratch
-          </h4>
-          <p className="flow-text grey-text text-darken-1">
-            Create a (minimal) full-stack app with user authentication via passport and JWTs
+          <p className="flow-text blue-text text-darken-1">
+            Welcome to RoboArm, please select below to begin. 
           </p>
           <br />
           <div className="col s6">
-            <Link to="/register" className="btn btn-large waves-effect waves-light hoverable blue accent-3" style={{
+            <Link to="/register" className="btn btn-large waves-effect waves-light hoverable yellow accent-3" style={{
               width: '140px',
-              borderRadius: '3px',
-              letterSpacing: '1.5px',
+              borderRadius: '50px',
+              letterSpacing: '3px',
+              font:'bold',
+              color: 'black',
             }}>
               Register
             </Link>
           </div>
           <div className="col s6">
-            <Link to="/login" className="btn btn-large btn-flat waves-effect white black-text" style={{
+            <Link to="/login" className="btn btn-large waves-effect waves-light hoverable yellow accent-3" style={{
               width: '140px',
-              borderRadius: '3px',
-              letterSpacing: '1.5px',
+              borderRadius: '50px',
+              letterSpacing: '2px',
+              font:'dark',
+              color: 'black',
             }}>
               Login
             </Link>

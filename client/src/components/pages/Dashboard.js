@@ -1,6 +1,8 @@
 import React, { useEffect, useContext } from 'react';
 import { Store } from '../../store';
 import { logoutUser } from '../../store/actions/authActions';
+import { Link } from "react-router-dom";
+
 
 import API from '../../utils/apiHelper';
 
@@ -23,19 +25,17 @@ const Dashboard = props => {
     logoutUser(props.history)(dispatch);
   };
 
-  return (
-    <div className="container valign-wrapper" style={{ height: '75vh' }}>
-      <div className="row">
-        <div className="col s12 center-align">
-          <h4>
-            <b>Hey there,</b> {user.name.split(' ')[0]}
-            <p className="flow-text grey-text text-darken-1">
-              You are logged into a full-stack{' '} <span style={{ fontFamily: 'monospace' }}>MERN</span> app
-            </p>
-          </h4>
 
+  return (
+    <div className="container valign-wrapper" style={{ height: '50vh' }}>
+      <div className="row">
+        {/* <br></br>
+      <Link to="/SaveMotion" role="button" className="btn btn-large waves-effect waves-light hoverable green accent-3">
+          View Motions
+          </Link> */}
+          <br></br>
           <button
-            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+            className="btn btn-med waves-effect waves-light hoverable blue accent-3"
             style={
               {
                 width: '150px',
@@ -47,6 +47,22 @@ const Dashboard = props => {
             onClick={onLogoutClick}>
             Logout
           </button>
+        
+        <div className="col s12 center-align">
+          <h4>
+            <b>Welcome To RoboArm,</b> {user.name.split(' ')[0]}
+          </h4>
+          <br></br><br></br>
+         <div>
+          <br></br>
+          <h4>Insert Image of the Claw and the Description</h4>
+          <Link to="/saveMotion">Saved Movements</Link>
+          <br></br><br></br>
+          <img alt="logoRoboArm" src={require('../../assets/roboArm.png')} />
+          <h3>
+          </h3>
+      </div>
+      
         </div>
       </div>
     </div>
