@@ -4,9 +4,9 @@ const Footer = props => {
   const year = new Date().getFullYear();
 
   return (
-    <div>
-      <p>&copy; {year} YOUR_NAME</p>
-    </div>
+    <footer>
+      <p>&copy; {year} Camila Mimila and Tyler Silverman - RoboArm</p>
+    </footer>
   );
 };
 
