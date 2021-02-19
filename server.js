@@ -1,14 +1,16 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const path = require('path');
-const express = require('express');
-const mongoose = require('mongoose');
-const passport = require('passport');
+const path = require("path");
+const express = require("express");
+const mongoose = require("mongoose");
+const passport = require("passport");
 // Middleware packages
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 // Routes
-const authRoutes = require('./routes/auth');
-const usersRoutes = require('./routes/users');
+const authRoutes = require("./routes/auth");
+const usersRoutes = require("./routes/users");
+const robotRoutes = require("./routes/robot");
+const favoriteRoutes = require("./routes/favorites");
 
 const PORT = process.env.PORT || 3001;
 
@@ -19,38 +21,60 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Mongoose connection to MongoDB. (https://mongoosejs.com/docs/guide.html)
-mongoose.connect(
-  process.env.MONGODB_URI || `mongodb://localhost:27017/${process.env.MONGODB_DATABASE}`,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-)
-.then(() => console.log('MongoDB connected'))
-.catch((err) => console.log(err));
+mongoose
+  .connect(
+    process.env.MONGODB_URI ||
+      `mongodb://localhost:27017/${process.env.MONGODB_DATABASE}`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log(err));
 
 // Passport JWT setup.
 app.use(passport.initialize());
-require('./config/passport')(passport);
+require("./config/passport")(passport);
 
 // Middleware to use when routes require authenticated user.
-const requiresAuth = passport.authenticate('jwt', { session: false });
+const requiresAuth = passport.authenticate("jwt", { session: false });
 
 // Login and register routes here don't require authenticated user.
-app.use('/api/auth', authRoutes);
+app.use("/api/auth", authRoutes);
 
 // For all authenticated routes, make sure to use this
-app.use('/api/users', requiresAuth, usersRoutes);
+app.use("/api/users", requiresAuth, usersRoutes, robotRoutes, favoriteRoutes);
+// app.use("/api/", requiresAuth, robotRoutes);
+// app.use("/api/", requiresAuth, favoriteRoutes);
 
 // For production, serve compiled React app in client build directory.
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
 
 app.listen(PORT, () => {
   console.log(`Server is listening at http://localhost:${PORT}`);
 });
+
+// socket.io connection to Rasberry Pi
+// const httpServer = require("http").createServer(app);
+// // const options = {
+// /* ... */
+// // };
+// const io = require("socket.io")(httpServer, options);
+
+// io.on("connection", (socket) => {
+//   console.log("client connected");
+//   handlePwmRequest(socket);
+//   handlePwmPulseRequest(socket);
+//   handleStopRequest(socket);
+//   handleClientDisconnection(socket);
+// });
+
+// httpServer.listen("192.168.50.37:3002");
+// WARNING !!! app.listen(3002); will not work here, as it creates a new HTTP server
