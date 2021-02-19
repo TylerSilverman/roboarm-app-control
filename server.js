@@ -45,8 +45,6 @@ app.use("/api/auth", authRoutes);
 
 // For all authenticated routes, make sure to use this
 app.use("/api/users", requiresAuth, usersRoutes, robotRoutes, favoriteRoutes);
-// app.use("/api/", requiresAuth, robotRoutes);
-// app.use("/api/", requiresAuth, favoriteRoutes);
 
 // For production, serve compiled React app in client build directory.
 if (process.env.NODE_ENV === "production") {
