@@ -1,8 +1,24 @@
-import axios from 'axios';
+import axios from "axios";
 
 const userController = {
-  getUser: function() {
+  // Get the current user
+  getUser: () => {
     return axios.get(`/api/users/me`);
+  },
+
+  // Gets all robot motions
+  getRbotMotions: () => {
+    return axios.get(`/api/users/robotmotions`);
+  },
+
+  // Gets all favorites
+  getFavorites: () => {
+    return axios.get(`/api/users/favorites`);
+  },
+
+  // Post a favorite
+  postFavorite: () => {
+    return axios.post(`/api/users/favorites`);
   },
 };
 
