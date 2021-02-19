@@ -7,7 +7,7 @@ const userController = {
   },
 
   // Gets all robot motions
-  getRbotMotions: () => {
+  getRobotMotions: () => {
     return axios.get(`/api/users/robotmotions`);
   },
 
