@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const RobotSchema = new Schema({
-  name: {
+  motorLocation: {
+    type: String,
+    required: true,
+  },
+  direction: {
     type: String,
     required: true,
   },
