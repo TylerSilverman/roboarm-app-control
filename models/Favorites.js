@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const RobotSchema = new Schema({
+const FavoritesSchema = new Schema({
   motorLocation: {
     type: String,
     required: true,
@@ -17,4 +17,4 @@ const RobotSchema = new Schema({
   },
 });
 
-module.exports = Robot = mongoose.model("Robot", RobotSchema);
+module.exports = Favorites = mongoose.model("Favorites", FavoritesSchema);
