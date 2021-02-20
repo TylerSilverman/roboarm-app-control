@@ -17,8 +17,8 @@ const userController = {
   },
 
   // Post a favorite
-  postFavorite: () => {
-    return axios.post(`/api/users/favorites`);
+  postFavorite: (data) => {
+    return axios.post(`/api/users/favorites`, data);
   },
 };
 
