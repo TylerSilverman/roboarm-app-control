@@ -9,101 +9,101 @@ moogose.connect("mongodb://localhost/robotArm_db", {
 let robotSeed = [
   {
     motorLocation: "base",
-    direction: "right",
+    direction: "left",
     motions: [
       {
         channel: 0,
-        pulse: 1000,
+        pulse: 500,
       },
     ],
   },
   {
     motorLocation: "base",
-    direction: "left",
-    motions: [
-      {
-        channel: 0,
-        pulse: 2000,
-      },
-    ],
-  },
-  {
-    motorLocation: "shoulder",
-    direction: "down",
-    motions: [
-      {
-        channel: 1,
-        pulse: 1000,
-      },
-    ],
-  },
-  {
-    motorLocation: "shoulder",
-    direction: "up",
-    motions: [
-      {
-        channel: 1,
-        pulse: 2000,
-      },
-    ],
-  },
-  {
-    motorLocation: "elbow",
-    direction: "down",
-    motions: [
-      {
-        channel: 2,
-        pulse: 1000,
-      },
-    ],
-  },
-  {
-    motorLocation: "elbow",
-    direction: "up",
-    motions: [
-      {
-        channel: 2,
-        pulse: 2000,
-      },
-    ],
-  },
-  {
-    motorLocation: "wrist articulation",
-    direction: "down",
-    motions: [
-      {
-        channel: 3,
-        pulse: 1000,
-      },
-    ],
-  },
-  {
-    motorLocation: "wrist articulation",
-    direction: "up",
-    motions: [
-      {
-        channel: 3,
-        pulse: 2000,
-      },
-    ],
-  },
-  {
-    motorLocation: "wrist roll",
     direction: "right",
     motions: [
       {
-        channel: 4,
+        channel: 0,
+        pulse: 1000,
+      },
+    ],
+  },
+  {
+    motorLocation: "shoulder",
+    direction: "up",
+    motions: [
+      {
+        channel: 1,
+        pulse: 500,
+      },
+    ],
+  },
+  {
+    motorLocation: "shoulder",
+    direction: "down",
+    motions: [
+      {
+        channel: 1,
+        pulse: 1000,
+      },
+    ],
+  },
+  {
+    motorLocation: "elbow",
+    direction: "down",
+    motions: [
+      {
+        channel: 2,
+        pulse: 500,
+      },
+    ],
+  },
+  {
+    motorLocation: "elbow",
+    direction: "up",
+    motions: [
+      {
+        channel: 2,
+        pulse: 1000,
+      },
+    ],
+  },
+  {
+    motorLocation: "wrist articulation",
+    direction: "down",
+    motions: [
+      {
+        channel: 3,
+        pulse: 500,
+      },
+    ],
+  },
+  {
+    motorLocation: "wrist articulation",
+    direction: "up",
+    motions: [
+      {
+        channel: 3,
         pulse: 1000,
       },
     ],
   },
   {
     motorLocation: "wrist roll",
-    direction: "left",
+    direction: "clockwise",
     motions: [
       {
         channel: 4,
-        pulse: 2000,
+        pulse: 500,
+      },
+    ],
+  },
+  {
+    motorLocation: "wrist roll",
+    direction: "c-clockwise",
+    motions: [
+      {
+        channel: 4,
+        pulse: 1000,
       },
     ],
   },
@@ -113,7 +113,7 @@ let robotSeed = [
     motions: [
       {
         channel: 3,
-        pulse: 1000,
+        pulse: 500,
       },
     ],
   },
@@ -123,7 +123,7 @@ let robotSeed = [
     motions: [
       {
         channel: 3,
-        pulse: 2000,
+        pulse: 1000,
       },
     ],
   },

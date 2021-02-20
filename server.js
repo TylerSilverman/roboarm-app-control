@@ -45,8 +45,6 @@ app.use("/api/auth", authRoutes);
 
 // For all authenticated routes, make sure to use this
 app.use("/api/users", requiresAuth, usersRoutes, robotRoutes, favoriteRoutes);
-// app.use("/api/", requiresAuth, robotRoutes);
-// app.use("/api/", requiresAuth, favoriteRoutes);
 
 // For production, serve compiled React app in client build directory.
 if (process.env.NODE_ENV === "production") {
@@ -57,24 +55,24 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server is listening at http://localhost:${PORT}`);
 });
 
 // socket.io connection to Rasberry Pi
-// const httpServer = require("http").createServer(app);
-// // const options = {
-// /* ... */
-// // };
-// const io = require("socket.io")(httpServer, options);
+const socket = require("socket.io");
+const io = socket(server, {
+  cors: {
+    origin: "http://localhost:3002/",
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
 
-// io.on("connection", (socket) => {
-//   console.log("client connected");
-//   handlePwmRequest(socket);
-//   handlePwmPulseRequest(socket);
-//   handleStopRequest(socket);
-//   handleClientDisconnection(socket);
-// });
+io.on("connection", (socket) => {
+  console.log("socket connected", socket.id);
 
-// httpServer.listen("192.168.50.37:3002");
-// WARNING !!! app.listen(3002); will not work here, as it creates a new HTTP server
+  socket.on("pwmpulse", (data) => {
+    io.sockets.emit("pwmpulse", data);
+  });
+});
