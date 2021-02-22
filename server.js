@@ -63,7 +63,7 @@ const server = app.listen(PORT, () => {
 const socket = require("socket.io");
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3002/",
+    origin: "http://robotarm.dyndns.org/",
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -72,7 +72,8 @@ const io = socket(server, {
 io.on("connection", (socket) => {
   console.log("socket connected", socket.id);
 
-  socket.on("pwmpulse", (data) => {
-    io.sockets.emit("pwmpulse", data);
+  socket.on("pwmpulse", (channel, pulse) => {
+    io.sockets.emit("pwmpulse", channel, pulse);
+    console.log(channel, pulse);
   });
 });
