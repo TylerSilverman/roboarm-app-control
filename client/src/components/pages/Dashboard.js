@@ -7,6 +7,7 @@ import Pca9685 from "../../utils/pca9685";
 import API from "../../utils/apiHelper";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import robotImage from "../../assets/roboArm.png";
 
 const Dashboard = (props) => {
   const { state, dispatch } = useContext(Store);
@@ -44,21 +45,13 @@ const Dashboard = (props) => {
     root: {
       flexGrow: 1,
     },
-    paper: {
-      padding: theme.spacing(1),
-      textAlign: "center",
-      color: theme.palette.text.secondary,
-    },
   }));
 
+  const classes = useStyles();
   return (
     <MotionContext.Provider value={{ robotMotions }}>
       <div className="container valign-wrapper" style={{ height: "50vh" }}>
         <div className="row">
-          {/* <br></br>
-      <Link to="/SaveMotion" role="button" className="btn btn-large waves-effect waves-light hoverable green accent-3">
-          View Motions
-          </Link> */}
           <br></br>
           <button
             className="btn btn-med waves-effect waves-light hoverable blue accent-3"
@@ -86,14 +79,16 @@ const Dashboard = (props) => {
               <Link to="/saveMotion">Saved Movements</Link>
               <br></br>
               <br></br>
-              <Grid container spacing={1}>
-                <Grid container item xs={12} spacing={6}>
-                  <img
-                    alt="logoRoboArm"
-                    src={require("../../assets/roboArm.png")}
-                  />
+              <Grid
+                container
+                alignItems="flex-start"
+                lassName={classes.root}
+                spacing={1}
+              >
+                <Grid item justify="center" xs={6} spacing={6}>
+                  <img alt="logoRoboArm" src={robotImage} />
                 </Grid>
-                <Grid container item xs={12} spacing={6}>
+                <Grid item justify="center" xs={6} spacing={6}>
                   <Pca9685 />
                 </Grid>
               </Grid>

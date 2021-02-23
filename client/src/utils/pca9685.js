@@ -6,7 +6,6 @@ import SaveIcon from "@material-ui/icons/Save";
 import MotionContext from "../utils/motionContext";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import API from "./apiHelper";
-import { io } from "socket.io-client";
 
 //Material UI style function
 const useStyles = makeStyles((theme) => ({
@@ -28,11 +27,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// Create a variable that will pass the data to the claw server through socket.io
-const socket = io("http://localhost:3002/", {
-  withCredentials: true,
-});
-
 function Pca9685() {
   // Material Ui Style function
   const classes = useStyles();
@@ -43,16 +37,18 @@ function Pca9685() {
   // Function to grab information from the buttons and send to the motors through socket.io
   const motionBtn = (e) => {
     e.preventDefault();
-    // pwm stands for pulse width modulation. We are passing the pulse in microseconds.
-    socket.emit(
-      "pwmpulse",
-      e.currentTarget.getAttribute("channel"),
-      e.currentTarget.getAttribute("pulse")
-    );
-    console.log(
-      e.currentTarget.getAttribute("channel"),
-      e.currentTarget.getAttribute("pulse")
-    );
+    API.postRobotMotions({
+      motions: {
+        channel: e.currentTarget.getAttribute("channel"),
+        pulse: e.currentTarget.getAttribute("pulse"),
+      },
+    })
+      .then()
+      .catch((err) => ({ err }));
+    // console.log(
+    //   e.currentTarget.getAttribute("channel"),
+    //   e.currentTarget.getAttribute("pulse")
+    // );
   };
 
   const favoritesBtn = (e) => {
