@@ -8,11 +8,11 @@ const Landing = props => {
   console.log({ state, props });
 
   return (
-    <div className="container black valign-wrapper " style={{ height: '80vh' }}>
+    <div className="container valign-wrapper " style={{ height: '80vh' }}>
       <div className="row">
         <div className="col s12 center-align">
-          <p className="flow-text blue-text text-darken-1">
-            Welcome to RoboArm, please select below to begin. 
+          <p className="flow-text bold-text text-darken-4">
+            Welcome to RoboArm, please login or create an account. 
           </p>
           <br />
           <div className="col s6">

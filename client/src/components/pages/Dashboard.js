@@ -50,10 +50,11 @@ const Dashboard = (props) => {
   const classes = useStyles();
   return (
     <MotionContext.Provider value={{ robotMotions }}>
-      <div className="container valign-wrapper" style={{ height: "50vh" }}>
+      <div className="container valign-wrapper" style={{ height: "auto" }}>
         <div className="row">
-          <br></br>
-          <button
+          <div>
+            <div>
+              <button
             className="btn btn-med waves-effect waves-light hoverable blue accent-3"
             style={{
               width: "150px",
@@ -65,36 +66,46 @@ const Dashboard = (props) => {
           >
             Logout
           </button>
-
-          <div>
-            <h4>
-              <b>Welcome To RoboArm,</b> {user.name.split(" ")[0]}
+          <Link to="/Dashboard" role="button" className="btn btn-med waves-effect waves-light hoverable blue accent-3" style={{
+              width: "150px",
+              borderRadius: "3px",
+              letterSpacing: "1.5px",
+              marginTop: "1rem",
+            }}>
+          Dashboard !
+          </Link>
+          <Link to="/saveMotion" role="button" className="btn btn-med waves-effect waves-light hoverable blue accent-3" style={{
+              width: "150px",
+              borderRadius: "3px",
+              letterSpacing: "1.5px",
+              marginTop: "1rem",
+            }}>
+          Saved Motions !
+          </Link>
+          <h4>
+              <b>You are now on the dashboard page.</b>
             </h4>
-            <br></br>
-            <br></br>
-            <div>
-              <br></br>
-              <h4>Insert Image of the Claw and the Description</h4>
-
-              <Link to="/saveMotion">Saved Movements</Link>
-              <br></br>
-              <br></br>
+            <h5>
+              <b>{user.name.split(" ")[0]}</b>, Select the Choices below to save movements and generate motion. 
+            </h5>
               <Grid
                 container
                 alignItems="flex-start"
                 lassName={classes.root}
                 spacing={1}
               >
-                <Grid item justify="center" xs={6} spacing={6}>
+                <Grid item justify="left" xs={6} spacing={6}>
                   <img alt="logoRoboArm" src={robotImage} />
-                </Grid>
-                <Grid item justify="center" xs={6} spacing={6}>
-                  <Pca9685 />
                 </Grid>
               </Grid>
             </div>
           </div>
+          <br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br>
         </div>
+        <Grid item justify="right" xs={6} spacing={6}>
+          <Pca9685 />
+         </Grid>
       </div>
     </MotionContext.Provider>
   );
