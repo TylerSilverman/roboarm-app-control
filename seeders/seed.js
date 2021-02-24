@@ -1,10 +1,15 @@
 let moogose = require("mongoose");
 let db = require("../models");
 
-moogose.connect("mongodb://localhost/robotArm_db", {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-});
+// moogose.connect("mongodb://localhost/robotArm_db", {
+
+moogose.connect(
+  "mongodb+srv://root:12345@cluster0.cuzc6.mongodb.net/robotArm_db?retryWrites=true&w=majority",
+  {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+  }
+);
 
 let robotSeed = [
   {

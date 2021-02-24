@@ -3,7 +3,7 @@ const { Robot } = require("../models");
 const { io } = require("socket.io-client");
 
 // Create a variable that will pass the data to the claw server through socket.io
-const socket = io("http://robotarm.dyndns.org/", {
+const socket = io("https://roboarmcontrol.herokuapp.com/", {
   withCredentials: true,
 });
 
