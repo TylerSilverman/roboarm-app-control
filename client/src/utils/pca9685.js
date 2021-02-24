@@ -13,12 +13,12 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   root: {
-    background: "linear-gradient(45deg, #63614f 30%, #3b3a32 90%)",
+    background: "gray",
     borderRadius: 3,
     border: 0,
     color: "white",
     height: 40,
-    padding: "10px",
+    padding: "auto",
     boxShadow: "0 3px 5px 2px rgba(59, 58, 50, .3)",
     margin: "5px",
   },
@@ -69,7 +69,7 @@ function Pca9685() {
     <div>
       <ButtonGroup
         orientation="vertical"
-        color="primary"
+        color="secondary"
         aria-label="vertical outlined primary button group"
       >
         {robotMotions.map((motion) => (
@@ -87,6 +87,8 @@ function Pca9685() {
             >
               {motion.motorLocation} - {motion.direction}
             </Button>
+
+            {/* //saved button symbols */}
             <Button
               classes={{
                 root: classes.root, // class name, e.g. `classes-nesting-root-x`

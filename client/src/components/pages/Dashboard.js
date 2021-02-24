@@ -33,7 +33,7 @@ const Dashboard = (props) => {
       })
       .catch((err) => console.log({ err }));
   }, []);
-  console.log(robotMotions);
+  // console.log(robotMotions);
 
   const onLogoutClick = (e) => {
     e.preventDefault();
@@ -66,44 +66,35 @@ const Dashboard = (props) => {
           >
             Logout
           </button>
-          <Link to="/Dashboard" role="button" className="btn btn-med waves-effect waves-light hoverable blue accent-3" style={{
-              width: "150px",
-              borderRadius: "3px",
-              letterSpacing: "1.5px",
-              marginTop: "1rem",
-            }}>
-          Dashboard !
-          </Link>
           <Link to="/saveMotion" role="button" className="btn btn-med waves-effect waves-light hoverable blue accent-3" style={{
               width: "150px",
               borderRadius: "3px",
               letterSpacing: "1.5px",
               marginTop: "1rem",
             }}>
-          Saved Motions !
+          Favorites
           </Link>
-          <h4>
-              <b>You are now on the dashboard page.</b>
-            </h4>
             <h5>
-              <b>{user.name.split(" ")[0]}</b>, Select the Choices below to save movements and generate motion. 
+              <b>Welcome to RoboArm, {user.name.split(" ")[0]}</b>
             </h5>
+            <p>Choose any button to move Robotic Arm. </p>
+            <p>Choose the save button to save favorite motions. </p>
               <Grid
                 container
                 alignItems="flex-start"
                 lassName={classes.root}
                 spacing={1}
               >
-                <Grid item justify="left" xs={6} spacing={6}>
+                <Grid item justify="auto" xs={6} spacing={6}>
                   <img alt="logoRoboArm" src={robotImage} />
                 </Grid>
               </Grid>
             </div>
           </div>
-          <br></br><br></br><br></br><br></br><br></br>
+          <br></br><br></br><br></br><br></br>
           <br></br><br></br><br></br>
         </div>
-        <Grid item justify="right" xs={6} spacing={6}>
+        <Grid item justify="auto" xs={6} spacing={6}>
           <Pca9685 />
          </Grid>
       </div>
