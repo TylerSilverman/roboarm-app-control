@@ -63,7 +63,8 @@ const server = app.listen(PORT, () => {
 const socket = require("socket.io");
 const io = socket(server, {
   cors: {
-    origin: "https://roboarmcontrol.herokuapp.com/",
+    origin: "https://roboarmcontrol.herokuapp.com/dashboard",
+    // origin: "http://robotarm.dyndns.org/",
     methods: ["GET", "POST"],
     credentials: true,
   },
