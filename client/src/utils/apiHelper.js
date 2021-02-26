@@ -11,11 +11,6 @@ const userController = {
     return axios.get(`/api/users/robotmotions`);
   },
 
-  //Send the selected motions to the backend to send it to the robot through the socket.io connection.
-  postRobotMotions: (data) => {
-    return axios.post(`/api/users/robotmotions`, data);
-  },
-
   // Gets all favorites
   getFavorites: () => {
     return axios.get(`/api/users/favorites`);
@@ -27,7 +22,7 @@ const userController = {
   },
 
   deleteFavorites: (id) => {
-    return axios.delete(`/api/users/favorites/` + id );
+    return axios.delete(`/api/users/favorites/` + id);
   },
 };
 
