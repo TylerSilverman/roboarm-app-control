@@ -4,34 +4,6 @@
 // channel 3 = wristArticulation;
 // channel 4 = wristRoll;
 // channel 5 = claw;
-
-const express = require("express");
-
-// Tells node that we are creating an "express" server
-const app = express();
-
-// Sets an initial port. We'll use this later in our listener
-const PORT = process.env.PORT || 3000;
-
-// Sets up the Express app to handle data parsing
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-const server = app.listen(PORT, () => {
-  console.log(`App listening on PORT: http://localhost:${PORT}`);
-});
-
-// Create a variable that will pass the data to the claw server through socket.io
-const socket = require("socket.io");
-const io = socket(server, {
-  cors: {
-    origin: "https://roboarmcontrol.herokuapp.com/dashboard",
-    // origin: "http://robotarm.dyndns.org/",
-    methods: ["GET", "POST"],
-    credentials: true,
-  },
-});
-
 /*
     Adafruit PCA9685 functions based on https://github.com/johntreacy/adafruit-pca9685
     Modified by: Camila Alves Meyer
@@ -59,41 +31,38 @@ process.on("exit", (code) => {
   console.log(`About to exit with code: ${code}`);
 });
 
+// socket.io connection to the App hosted at Heroku
+const socket = require("socket.io-client")(
+  "https://roboarmcontrol.herokuapp.com/"
+);
+
 // Setup the socketio connection and listeners
 // Requires socket.io and pass server port
-io.on("connection", (socket) => {
-  console.log("client connected");
-  handlePwmRequest(socket);
-  handlePwmPulseRequest(socket);
-  handleStopRequest(socket);
-  handleClientDisconnection(socket);
+socket.on("connection_error", () => {
+  console.log("bad request");
 });
 
-function handlePwmRequest(socket) {
-  socket.on("pwm", (channel, value) => {
-    const ch = parseInt(channel);
-    const v = parseInt(value);
-    pwm.setPwm(ch, 0, v);
-  });
-}
+socket.on("disconnect", (reason) => {
+  console.log(reason);
+});
 
-function handlePwmPulseRequest(socket) {
-  socket.on("pwmpulse", (channel, value) => {
-    const ch = parseInt(channel);
-    const v = parseInt(value);
-    pwm.setPulse(ch, v);
-  });
-}
+socket.on("pwm", (channel, value) => {
+  const ch = parseInt(channel);
+  const v = parseInt(value);
+  pwm.setPwm(ch, 0, v);
+});
 
-function handleStopRequest(socket) {
-  socket.on("pwmstop", () => {
-    pwm.stop();
-  });
-}
+socket.on("pwmpulse", (channel, value) => {
+  const ch = parseInt(channel);
+  const v = parseInt(value);
+  pwm.setPulse(ch, v);
+});
 
-function handleClientDisconnection(socket) {
-  socket.on("disconnect", () => {
-    pwm.stop();
-    console.log("client disconnected");
-  });
-}
+socket.on("pwmstop", () => {
+  pwm.stop();
+});
+
+socket.on("disconnect", () => {
+  pwm.stop();
+  console.log("client disconnected");
+});

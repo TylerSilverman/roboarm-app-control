@@ -1,0 +1,32 @@
+{
+  "name": "roboArm",
+  "version": "0.2.1",
+  "main": "pca_server.js",
+  "author": {
+    "name": "Camila and Tyler"
+  },
+  "description": "roboArm app control",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "dependencies": {
+    "adafruit-pca9685": "^0.1.4",
+    "bufferutil": "^4.0.2",
+    "express": "^4.17.1",
+    "mime": "^2.4.6",
+    "onoff": ">0.3.0",
+    "path": "^0.12.7",
+    "socket.io": "^3.0.4",
+    "socket.io-client": "^3.1.1",
+    "utf-8-validate": "^5.0.3"
+  },
+  "repository": "https://github.com/Mimila-85/roboarm-app-control",
+  "license": "MIT",
+  "readme": "README.txt",
+  "devDependencies": {
+    "coffee-script": "^1.12.7",
+    "coffeescript": "^2.5.1"
+  }
+}
