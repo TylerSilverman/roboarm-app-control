@@ -25,6 +25,10 @@ const userController = {
   postFavorite: (data) => {
     return axios.post(`/api/users/favorites`, data);
   },
+
+  deleteFavorites: (id) => {
+    return axios.delete(`/api/users/favorites/` + id );
+  },
 };
 
 export default userController;

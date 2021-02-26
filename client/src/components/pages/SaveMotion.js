@@ -9,6 +9,7 @@ import { logoutUser } from "../../store/actions/authActions";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Icon } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 
@@ -67,6 +68,20 @@ const SaveMotion = (props) => {
     // );
   };
 
+  const deleteBtn = (e) => {
+    e.preventDefault();
+    API.deleteFavorites(
+        e.currentTarget.getAttribute("id")
+    )
+      .then()
+      .catch((err) => ({ err }));
+    // console.log(
+    //   e.currentTarget.getAttribute("channel"),
+    //   e.currentTarget.getAttribute("pulse")
+    // );
+  };
+
+
   // Run a GET request on the page load to grab the motor motions saved in the DB
   useEffect(() => {
     API.getFavorites()
@@ -75,7 +90,9 @@ const SaveMotion = (props) => {
         console.log(motions.data);
       })
       .catch((err) => console.log({ err }));
-  }, []);
+  }, [
+    
+  ]);
   console.log("my favorites" + favorites)
 
 
@@ -125,25 +142,23 @@ const SaveMotion = (props) => {
           </div>
         </div>
       </div>
-      <br></br>
             <div class="card">
-            <h3 style={{
-                width: "auto",
-                borderRadius: "4px",
-                letterSpacing: "6px",
-                marginTop: "2rem",
-              }}>Favorite Motions</h3>
+              <div class="row-6">
+            
+              
             <ButtonGroup
               orientation="vertical"
               color="secondary"
               aria-label="vertical button"
       >
         {favorites.map((motion) => (
+          <div>
           <Button
             classes={{
               root: classes.root, // class name, e.g. `classes-nesting-root-x`
               label: classes.label, // class name, e.g. `classes-nesting-label-x`
             }}
+            
             endIcon={<Icon>send</Icon>}
             key={motion.id}
             // direction={motion.motions}
@@ -153,9 +168,23 @@ const SaveMotion = (props) => {
           >
             {motion.motorLocation} - {motion.direction}
           </Button>
+          <Button
+          classes={{
+            root: classes.root, // class name, e.g. `classes-nesting-root-x`
+            label: classes.label, // class name, e.g. `classes-nesting-label-x`
+          }}
+          startIcon={<DeleteIcon />}
+          location={motion.motorLocation}
+          direction={motion.direction}
+          channel={motion.motions[0].channel}
+          pulse={motion.motions[0].pulse}
+          id={motion.id}
+          onClick={deleteBtn}
+        />
+        </div>
         ))}
       </ButtonGroup>
-
+      </div>
             </div>
       
     </div>
