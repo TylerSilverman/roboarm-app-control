@@ -60,15 +60,7 @@ const server = app.listen(PORT, () => {
 });
 
 // socket.io connection to Rasberry Pi
-const socket = require("socket.io");
-const io = socket(server, {
-  cors: {
-    origin: "https://roboarmcontrol.herokuapp.com/dashboard",
-    // origin: "http://robotarm.dyndns.org/",
-    methods: ["GET", "POST"],
-    credentials: true,
-  },
-});
+const io = require("socket.io")(server);
 
 io.on("connection", (socket) => {
   console.log("socket connected", socket.id);
