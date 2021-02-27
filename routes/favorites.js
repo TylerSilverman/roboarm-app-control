@@ -24,7 +24,7 @@ router.post("/favorites", async (req, res) => {
 
 router.delete("/favorites/:id", async (req, res) => {
   try {
-    const newFavorite = await Favorites.deleteOne();
+    const newFavorite = await Favorites.findByIdAndDelete(req.params.id);
     res.status(200).json(newFavorite);
   } catch (err) {
     res.status(400).json(err.message);
