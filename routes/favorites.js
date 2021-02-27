@@ -12,11 +12,20 @@ router.get("/favorites", async (req, res) => {
 
 router.post("/favorites", async (req, res) => {
   try {
-    const newFavorite = await Favorites.create({
-      ...req.body,
-      user_id: req.user._id,
+    // Before creating a favorite, check if it already exists.
+    Favorites.find({
+      motorLocation: req.body.motorLocation,
+      direction: req.body.direction,
+    }).then((res) => {
+      if (!res.length) {
+        Favorites.create({
+          ...req.body,
+          user_id: req.user._id,
+        });
+        res.status(200).json(newFavorite);
+        console.log(newFavorite);
+      }
     });
-    res.status(200).json(newFavorite);
   } catch (err) {
     res.status(400).json(err.message);
   }
