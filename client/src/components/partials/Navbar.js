@@ -35,17 +35,7 @@ const Navbar = (props) => {
           </span>
           RoboArm
         </NavLink>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <li>
-            {state.auth.isAuthenticated ? (
-              <a href="/" className="blue-text" onClick={onLogoutClick}>
-                Logout
-              </a>
-            ) : (
-              " "
-            )}
-          </li>
-
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li>
             {" "}
             {state.auth.isAuthenticated ? (
@@ -63,6 +53,16 @@ const Navbar = (props) => {
               <NavLink to="/saveMotion" className="blue-text">
                 Favorites
               </NavLink>
+            ) : (
+              " "
+            )}
+          </li>
+
+          <li>
+            {state.auth.isAuthenticated ? (
+              <a href="/" className="blue-text" onClick={onLogoutClick}>
+                Logout
+              </a>
             ) : (
               " "
             )}

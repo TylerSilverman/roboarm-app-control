@@ -10,14 +10,45 @@ import {
   Container,
   ButtonGroup,
   Card,
+  CardMedia,
   CardContent,
   Typography,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     flexGrow: 1,
+//   },
+//   paper: {
+//     padding: theme.spacing(2),
+//     paddingBottom: 25,
+//     textAlign: "center",
+//     color: theme.palette.text.secondary,
+//   },
+//   card: {
+//     width: 360,
+//     height: 660,
+//     margin: "auto",
+//   },
+//   media: {
+//     width: "100%",
+//     alignItems: "center",
+//     justify: "center",
+//   },
+// }));
+
+
+
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
+  },
+  card: {
+    width: 350,
+    height: 660,
+    margin: "auto",
   },
   root: {
     background: "gray",
@@ -85,19 +116,37 @@ const SaveMotion = (props) => {
   const classes = useStyles();
   return (
     <Container>
-      <Grid container direction="row">
-        <Grid item>
-          <Typography variant="h4">
-            <b>Welcome to the favorites Page!</b>
+      <Grid
+          container
+          direction="row"
+          alignItems="center"
+          justify="center"
+          m="25px"
+        />
+      <br></br>
+       <Typography variant="h5" align="center">
+            <b>Welcome to the favorites page</b>
           </Typography>
-          <img alt="logoRoboArm" src={robotImage} />
-        </Grid>
+      <br></br><br></br><br></br>
+      <Grid container direction="col">
+        <Card className={classes.card}>
+          <CardMedia
+            className={classes.media}
+            component="img"
+            title="Robot Claw"
+            alt="Robot Claw"
+            image={robotImage}
+          />
+        </Card>
         <Grid item>
           <br></br>
-          <Typography variant="h5">
-            <b>{user.name.split(" ")[0]}</b>, your saved choices are below:
+          <Typography variant="h5" align="center">
+            <b>Your saved motions are below, {user.name.split(" ")[0]}</b>
           </Typography>
+          <br></br>
+          <br></br>
           <Card>
+            <p>Click the trash can icon to delete from the list</p>
             <CardContent>
               <ButtonGroup
                 padding="50px"
