@@ -1,13 +1,41 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Store } from "../../store";
-// import { logoutUser } from "../../store/actions/authActions";
-import { Link } from "react-router-dom";
 import MotionContext from "../../utils/motionContext";
 import Pca9685 from "../../utils/pca9685";
 import API from "../../utils/apiHelper";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import robotImage from "../../assets/roboArm3.png";
+import {
+  Container,
+  Grid,
+  Box,
+  Paper,
+  Card,
+  CardMedia,
+  Typography,
+} from "@material-ui/core";
+import robotImage from "../../assets/roboArm4.png";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    paddingBottom: 25,
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+  card: {
+    width: 360,
+    height: 660,
+    margin: "auto",
+  },
+  media: {
+    width: "100%",
+    alignItems: "center",
+    justify: "center",
+  },
+}));
 
 const Dashboard = (props) => {
   const { state, dispatch } = useContext(Store);
@@ -33,58 +61,46 @@ const Dashboard = (props) => {
       })
       .catch((err) => console.log({ err }));
   }, []);
-  // console.log(robotMotions);
-
-  // const onLogoutClick = (e) => {
-  //   e.preventDefault();
-
-  //   logoutUser(props.history)(dispatch);
-  // };
-
-  const useStyles = makeStyles((theme) => ({
-    button: {
-      margin: theme.spacing(1),
-    },
-    root: {
-      flexGrow: 1,
-      
-    },
-  }));
 
   const classes = useStyles();
+
   return (
     <MotionContext.Provider value={{ robotMotions }}>
-      <div className="container valign-wrapper" style={{ height: "50" }}>
-        <Grid>
-          <div>
-            <div>
-            <h5>
-              <b>Welcome to RoboArm, {user.name.split(" ")[0]}</b>
-            </h5>
-            <p>Choose any button to move Robotic Arm. </p>
-            <p>Choose the save button to save favorite motions. </p>
-              <Grid
-                container
-                alignItems="flex"
-                lassName={classes.root}
-                spacing={1}
-              >
-                
-                <Grid item justify="auto" xs={6} spacing={6}>
-                  <img alt="logoRoboArm" src={robotImage} />
-                </Grid>
-                
-              </Grid>
-            </div>
-          </div>
-          <br></br><br></br><br></br><br></br>
-          <br></br><br></br><br></br>
+      <Container className={classes.root}>
+        <Grid
+          container
+          direction="row"
+          alignItems="center"
+          justify="center"
+          m="25px"
+        >
+          <Grid item xs>
+            <Box m="25px">
+              <Paper elevation={10} className={classes.paper} justify="center">
+                <Typography variant="h4" align="center">
+                  <b>Welcome to RoboArm, {user.name.split(" ")[0]}</b>
+                </Typography>
+              </Paper>
+            </Box>
+          </Grid>
         </Grid>
-        
-        <Grid item justify="sm" xs={6} spacing={6}>
-          <Pca9685 />
-         </Grid>
-      </div>
+        <Grid container direction="row">
+          <Grid item xs>
+            <Card className={classes.card}>
+              <CardMedia
+                className={classes.media}
+                component="img"
+                title="Robot Claw"
+                alt="Robot Claw"
+                image={robotImage}
+              />
+            </Card>
+          </Grid>
+          <Grid item xs>
+            <Pca9685 />
+          </Grid>
+        </Grid>
+      </Container>
     </MotionContext.Provider>
   );
 };
