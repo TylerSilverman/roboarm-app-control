@@ -1,13 +1,27 @@
-import React from 'react';
+import React from "react";
+import { AppBar, Container, Toolbar, Typography } from "@material-ui/core";
+import { makeStyles, withTheme } from "@material-ui/core/styles";
 
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    top: "auto",
+    bottom: 0,
+    background: "#3266A1",
+  },
+}));
 const Footer = (props) => {
   const year = new Date().getFullYear();
 
+  const classes = useStyles();
+
   return (
-    <footer className="s3 brand-logo center black-text" style={{ fontFamily: 'monospace',
-     }}>
-      <p>&copy; {year} Camila Mimila and Tyler Silverman - RoboArm</p>
-    </footer>
+    <AppBar position="fixed" className={classes.appBar}>
+      <Toolbar>
+        <Typography variant="body2" align="center">
+          &copy; {year} Camila Alves Meyer and Tyler Silverman - RoboArm
+        </Typography>
+      </Toolbar>
+    </AppBar>
   );
 };
 
