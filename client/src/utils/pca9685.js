@@ -1,10 +1,15 @@
 import React, { useContext } from "react";
-import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
-import { Icon } from "@material-ui/core";
+import {
+  Icon,
+  Card,
+  CardContent,
+  Typography,
+  ButtonGroup,
+  Button,
+} from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import MotionContext from "../utils/motionContext";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
 import API from "./apiHelper";
 import { io } from "socket.io-client";
 
@@ -13,15 +18,32 @@ const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
   },
-  root: {
-    background: "gray",
+  card: {
+    width: 360,
+    height: 660,
+    margin: "auto",
+  },
+  root1: {
+    background: "linear-gradient(45deg, #2775A4 30%, #3D4F99 90%)",
     borderRadius: 3,
     border: 0,
     color: "white",
     height: 40,
-    padding: "auto",
+    padding: "10px",
     boxShadow: "0 3px 5px 2px rgba(59, 58, 50, .3)",
     margin: "5px",
+    width: "200px",
+  },
+  root2: {
+    background: "linear-gradient(45deg, #2775A4 30%, #3D4F99 90%)",
+    borderRadius: 3,
+    border: 0,
+    color: "white",
+    height: 40,
+    padding: "10px",
+    boxShadow: "0 3px 5px 2px rgba(59, 58, 50, .3)",
+    margin: "5px",
+    width: "50px",
   },
   label: {
     textTransform: "capitalize",
@@ -64,45 +86,52 @@ function Pca9685() {
   };
 
   return (
-    <div>
-      <ButtonGroup
-        orientation="vertical"
-        color="secondary"
-        aria-label="vertical outlined primary button group"
-      >
-        {robotMotions.map((motion) => (
-          <div>
-            <Button
-              classes={{
-                root: classes.root, // class name, e.g. `classes-nesting-root-x`
-                label: classes.label, // class name, e.g. `classes-nesting-label-x`
-              }}
-              endIcon={<Icon>send</Icon>}
-              key={motion.id}
-              channel={motion.motions[0].channel}
-              pulse={motion.motions[0].pulse}
-              onClick={motionBtn}
-            >
-              {motion.motorLocation} - {motion.direction}
-            </Button>
+    <Card className={classes.card}>
+      <CardContent>
+        <Typography variant="body1">
+          Choose any button to move Robotic Arm.
+          <br></br>
+          Choose the save button to save favorite motions.
+        </Typography>
+        <ButtonGroup
+          orientation="vertical"
+          color="secondary"
+          aria-label="vertical outlined primary button group"
+        >
+          {robotMotions.map((motion) => (
+            <div>
+              <Button
+                classes={{
+                  root: classes.root1, // class name, e.g. `classes-nesting-root-x`
+                  label: classes.label, // class name, e.g. `classes-nesting-label-x`
+                }}
+                endIcon={<Icon>send</Icon>}
+                key={motion.id}
+                channel={motion.motions[0].channel}
+                pulse={motion.motions[0].pulse}
+                onClick={motionBtn}
+              >
+                {motion.motorLocation} - {motion.direction}
+              </Button>
 
-            {/* //saved button symbols */}
-            <Button
-              classes={{
-                root: classes.root, // class name, e.g. `classes-nesting-root-x`
-                label: classes.label, // class name, e.g. `classes-nesting-label-x`
-              }}
-              startIcon={<SaveIcon />}
-              location={motion.motorLocation}
-              direction={motion.direction}
-              channel={motion.motions[0].channel}
-              pulse={motion.motions[0].pulse}
-              onClick={favoritesBtn}
-            />
-          </div>
-        ))}
-      </ButtonGroup>
-    </div>
+              {/* //saved button symbols */}
+              <Button
+                classes={{
+                  root: classes.root2, // class name, e.g. `classes-nesting-root-x`
+                  label: classes.label, // class name, e.g. `classes-nesting-label-x`
+                }}
+                startIcon={<SaveIcon />}
+                location={motion.motorLocation}
+                direction={motion.direction}
+                channel={motion.motions[0].channel}
+                pulse={motion.motions[0].pulse}
+                onClick={favoritesBtn}
+              />
+            </div>
+          ))}
+        </ButtonGroup>
+      </CardContent>
+    </Card>
   );
 }
 
