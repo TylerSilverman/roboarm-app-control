@@ -16,6 +16,8 @@
 const makePwm = require("adafruit-pca9685");
 const pwm = makePwm({ freq: 50, correctionFactor: 1.118 });
 
+console.log("Server connected");
+
 // deal with any signals and cleanup
 process.on("SIGINT", (code) => {
   console.log("\nCtrl-C caught ...");
@@ -55,10 +57,12 @@ socket.on("pwm", (channel, value) => {
 socket.on("pwmpulse", (channel, value) => {
   const ch = parseInt(channel);
   const v = parseInt(value);
+  console.log("pwmpulse", ch, v);
   pwm.setPulse(ch, v);
 });
 
 socket.on("pwmstop", () => {
+  console.log("pwmstop");
   pwm.stop();
 });
 
