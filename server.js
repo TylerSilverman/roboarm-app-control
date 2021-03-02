@@ -63,10 +63,14 @@ const server = app.listen(PORT, () => {
 const io = require("socket.io")(server);
 
 io.on("connection", (socket) => {
-  console.log("socket connected", socket.id);
+  // console.log("socket connected", socket.id);
 
   socket.on("pwmpulse", (channel, pulse) => {
     io.sockets.emit("pwmpulse", channel, pulse);
-    console.log(channel, pulse);
+    // console.log(channel, pulse);
+  });
+
+  socket.on("pwmstop", () => {
+    io.sockets.emit("pwmpulse");
   });
 });
