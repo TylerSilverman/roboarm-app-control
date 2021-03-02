@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 const socket = io();
 
-function Pca9685() {
+function ClawControls() {
   // Material Ui Style function
   const classes = useStyles();
 
@@ -136,4 +136,4 @@ function Pca9685() {
   );
 }
 
-export default Pca9685;
+export default ClawControls;

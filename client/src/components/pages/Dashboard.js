@@ -12,9 +12,11 @@ import {
   Card,
   CardMedia,
   Typography,
+  Button,
 } from "@material-ui/core";
-// import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 import robotImage from "../../assets/roboArm4.png";
+import { io } from "socket.io-client";
+import PanToolRoundedIcon from "@material-ui/icons/PanToolRounded";
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
   root: {
@@ -59,7 +61,20 @@ const useStyles = makeStyles((theme) => ({
       zIndex: 1,
     },
   },
+  root1: {
+    background: "linear-gradient(45deg, #C70039 30%, #FF0000 90%)",
+    borderRadius: 3,
+    border: 0,
+    color: "white",
+    height: 40,
+    padding: "10px",
+    boxShadow: "0 3px 5px 2px rgba(59, 58, 50, .3)",
+    margin: "5px",
+    width: "200px",
+  },
 }));
+
+const socket = io();
 
 const Dashboard = (props) => {
   const { state } = useContext(Store);
@@ -85,6 +100,14 @@ const Dashboard = (props) => {
       })
       .catch((err) => console.log({ err }));
   }, []);
+
+  // Function to grab information from the buttons and send to the motors through socket.io
+  const stopBtn = (e) => {
+    e.preventDefault();
+    // pwm stands for pulse width modulation. We are passing the pulse in microseconds.
+    // Using socket.io for real time communication with the Rasberry Pi.
+    socket.emit("pwmstop");
+  };
 
   const gridStyles = useGridStyles();
   const classes = useStyles();
@@ -116,17 +139,39 @@ const Dashboard = (props) => {
           container
           spacing={2}
         >
-          <Grid item xs>
-            <Card elevation={10} className={classes.card}>
-              <CardMedia
-                component="img"
-                title="Robot Claw"
-                alt="Robot Claw"
-                image={robotImage}
-              />
-            </Card>
+          <Grid
+            container
+            item
+            xs
+            style={{ padding: 16 }}
+            alignItems="center"
+            justifyContent="center"
+            direction="column"
+            spacing={2}
+          >
+            <Grid item xs>
+              <Card elevation={10} className={classes.card}>
+                <CardMedia
+                  component="img"
+                  title="Robot Claw"
+                  alt="Robot Claw"
+                  image={robotImage}
+                />
+              </Card>
+            </Grid>
+            <Grid item xs>
+              <Button
+                classes={{
+                  root: classes.root1, // class name, e.g. `classes-nesting-root-x`
+                }}
+                endIcon={<PanToolRoundedIcon />}
+                onClick={stopBtn}
+              >
+                Stop!!!!
+              </Button>
+            </Grid>
           </Grid>
-         
+
           {/* //container for the buttons  */}
           <Grid item xs>
             <ClawControls />
