@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { Store } from "../../store";
 import MotionContext from "../../utils/motionContext";
-import Pca9685 from "../../utils/pca9685";
+import ClawControls from "../partials/ClawControls";
 import API from "../../utils/apiHelper";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -13,27 +13,51 @@ import {
   CardMedia,
   Typography,
 } from "@material-ui/core";
+// import { useCoverCardMediaStyles } from "@mui-treasury/styles/cardMedia/cover";
 import robotImage from "../../assets/roboArm4.png";
+
+const useGridStyles = makeStyles(({ breakpoints }) => ({
+  root: {
+    overflow: "auto",
+    alignItems: "center",
+    [breakpoints.only("xs")]: {
+      "& > *:not(:first-child)": {
+        paddingLeft: 0,
+      },
+    },
+    [breakpoints.up("sm")]: {
+      justifyContent: "center",
+    },
+  },
+}));
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   paper: {
+    borderRadius: "0.5rem",
     padding: theme.spacing(2),
     paddingBottom: 25,
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
   card: {
-    width: 360,
-    height: 660,
+    background: "linear-gradient(45deg, #2775A4 30%, #3D4F99 90%)",
+    borderRadius: "0.5rem",
+    position: "relative",
+    maxWidth: 360,
+    minHeight: 300,
     margin: "auto",
-  },
-  media: {
-    width: "100%",
-    alignItems: "center",
-    justify: "center",
+    padding: "10px",
+    "&:after": {
+      display: "block",
+      position: "absolute",
+      width: "100%",
+      height: "64%",
+      bottom: 0,
+      zIndex: 1,
+    },
   },
 }));
 
@@ -62,7 +86,9 @@ const Dashboard = (props) => {
       .catch((err) => console.log({ err }));
   }, []);
 
+  const gridStyles = useGridStyles();
   const classes = useStyles();
+  // const mediaStyles = useCoverCardMediaStyl/es({ bgPosition: "top" });
 
   return (
     <MotionContext.Provider value={{ robotMotions }}>
@@ -84,11 +110,15 @@ const Dashboard = (props) => {
             </Box>
           </Grid>
         </Grid>
-        <Grid container direction="row">
+        <Grid
+          style={{ padding: 16 }}
+          classes={gridStyles}
+          container
+          spacing={2}
+        >
           <Grid item xs>
-            <Card className={classes.card}>
+            <Card elevation={10} className={classes.card}>
               <CardMedia
-                className={classes.media}
                 component="img"
                 title="Robot Claw"
                 alt="Robot Claw"
@@ -98,7 +128,7 @@ const Dashboard = (props) => {
           </Grid>
           {/* //container for the buttons  */}
           <Grid item xs>
-            <Pca9685 />
+            <ClawControls />
           </Grid>
         </Grid>
       </Container>

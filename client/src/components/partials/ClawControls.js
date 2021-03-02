@@ -9,8 +9,8 @@ import {
   Button,
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
-import MotionContext from "../utils/motionContext";
-import API from "./apiHelper";
+import MotionContext from "../../utils/motionContext";
+import API from "../../utils/apiHelper";
 import { io } from "socket.io-client";
 
 //Material UI style function
@@ -19,8 +19,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
   card: {
-    width: 360,
-    height: 660,
+    borderRadius: "0.5rem",
+    width: 325,
+    minHeight: 660,
     margin: "auto",
   },
   root1: {
@@ -86,7 +87,7 @@ function Pca9685() {
   };
 
   return (
-    <Card className={classes.card}>
+    <Card elevation={10} className={classes.card}>
       <CardContent>
         <Typography variant="body1">
           Choose any button to move Robotic Arm.

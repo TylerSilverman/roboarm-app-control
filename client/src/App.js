@@ -46,8 +46,8 @@ const App = () => {
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/saveMotion" component={SaveMotion} />
         </Switch>
+        <Footer />
       </div>
-      <Footer />
     </Router>
   );
 };
