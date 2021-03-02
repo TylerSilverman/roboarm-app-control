@@ -6,7 +6,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   overflow-y: scroll;
-  height: calc(100vh - 56px);
+  height: calc(100vh - 30px);
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
