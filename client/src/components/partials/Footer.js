@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme) => ({
     top: "auto",
     bottom: 0,
     background: "#3266A1",
+    height: "30px",
+    justifyContent: "center",
+    alignItems: "center",
   },
 }));
 const Footer = (props) => {
