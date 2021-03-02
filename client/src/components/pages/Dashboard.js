@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Dashboard = (props) => {
-  const { state, dispatch } = useContext(Store);
+  const { state } = useContext(Store);
   const user = state.auth.user;
 
   // Store the motor motions grabbed from the DB to send to the pca9685 file
@@ -126,6 +126,7 @@ const Dashboard = (props) => {
               />
             </Card>
           </Grid>
+         
           {/* //container for the buttons  */}
           <Grid item xs>
             <ClawControls />

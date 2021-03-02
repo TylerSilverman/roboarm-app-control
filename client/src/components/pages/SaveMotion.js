@@ -3,10 +3,13 @@ import { Store } from "../../store";
 import API from "../../utils/apiHelper";
 import { makeStyles } from "@material-ui/core/styles";
 import robotImage from "../../assets/roboArm4.png";
+import MotionContext from "../../utils/motionContext";
 import {
   Icon,
   Button,
   Grid,
+  Paper,
+  Box,
   Container,
   ButtonGroup,
   Card,
@@ -17,56 +20,53 @@ import {
 import DeleteIcon from "@material-ui/icons/Delete";
 
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     flexGrow: 1,
-//   },
-//   paper: {
-//     padding: theme.spacing(2),
-//     paddingBottom: 25,
-//     textAlign: "center",
-//     color: theme.palette.text.secondary,
-//   },
-//   card: {
-//     width: 360,
-//     height: 660,
-//     margin: "auto",
-//   },
-//   media: {
-//     width: "100%",
-//     alignItems: "center",
-//     justify: "center",
-//   },
-// }));
-
-
-
+const useGridStyles = makeStyles(({ breakpoints }) => ({
+  root: {
+    overflow: "auto",
+    alignItems: "center",
+    [breakpoints.only("xs")]: {
+      "& > *:not(:first-child)": {
+        paddingLeft: 0,
+      },
+    },
+    [breakpoints.up("sm")]: {
+      justifyContent: "center",
+    },
+  },
+}));
+//styles for the claw image
 const useStyles = makeStyles((theme) => ({
-  button: {
-    margin: theme.spacing(1),
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    borderRadius: "0.5rem",
+    padding: theme.spacing(2),
+    paddingBottom: 25,
+    textAlign: "center",
+    color: theme.palette.text.secondary,
   },
   card: {
-    width: 350,
-    height: 660,
+    background: "linear-gradient(45deg, #2775A4 30%, #3D4F99 90%)",
+    borderRadius: "0.5rem",
+    position: "relative",
+    maxWidth: 360,
+    minHeight: 300,
     margin: "auto",
-  },
-  root: {
-    background: "gray",
-    borderRadius: 5,
-    border: 0,
-    color: "white",
-    height: "50px",
-    padding: "auto",
-    boxShadow: "0 3px 5px 2px rgba(59, 58, 50, .3)",
-    margin: "5px",
-  },
-  label: {
-    textTransform: "capitalize",
+    padding: "10px",
+    "&:after": {
+      display: "block",
+      position: "absolute",
+      width: "100%",
+      height: "64%",
+      bottom: 0,
+      zIndex: 1,
+    },
   },
 }));
 
 const SaveMotion = (props) => {
-  const { state, dispatch } = useContext(Store);
+  const { state } = useContext(Store);
   const user = state.auth.user;
   const [favorites, setFavorites] = useState([]);
 
@@ -114,24 +114,30 @@ const SaveMotion = (props) => {
   console.log("my favorites" + favorites);
 
   const classes = useStyles();
+  const gridStyles = useGridStyles();
+
   return (
+    <MotionContext.Provider value={{ favorites }}>
     <Container>
       <Grid
-          container
-          direction="row"
-          alignItems="center"
-          justify="center"
-          m="25px"
-        />
-      <br></br>
-       <Typography variant="h5" align="center">
-            <b>Welcome to the favorites page</b>
-          </Typography>
+        container
+        style={{ padding: 16 }}
+        classes={gridStyles}
+        spacing={2}
+      />
+      <Grid item xs>
+        <Box m="25px">
+          <Paper elevation={10} className={classes.paper} justify="center">
+            <Typography variant="h4" align="center">
+              <b>Saved Motions</b>
+            </Typography>
+          </Paper>
+        </Box>
+      </Grid>
       <br></br><br></br><br></br>
-      <Grid container direction="col">
-        <Card className={classes.card}>
+      <Grid container direction="col" item xs>
+        <Card elevation={10} className={classes.card}>
           <CardMedia
-            className={classes.media}
             component="img"
             title="Robot Claw"
             alt="Robot Claw"
@@ -139,11 +145,6 @@ const SaveMotion = (props) => {
           />
         </Card>
         <Grid item>
-          <br></br>
-          <Typography variant="h5" align="center">
-            <b>Your saved motions are below, {user.name.split(" ")[0]}</b>
-          </Typography>
-          <br></br>
           <br></br>
           <Card>
             <p>Click the trash can icon to delete from the list</p>
@@ -155,7 +156,7 @@ const SaveMotion = (props) => {
                 aria-label="vertical button"
               >
                 {favorites.map((motion) => (
-                  <div>
+                  <div> 
                     <Button
                       classes={{
                         root: classes.root, // class name, e.g. `classes-nesting-root-x`
@@ -185,12 +186,14 @@ const SaveMotion = (props) => {
                     />
                   </div>
                 ))}
+                 <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
               </ButtonGroup>
             </CardContent>
           </Card>
         </Grid>
       </Grid>
     </Container>
+     </MotionContext.Provider>
   );
 };
 
