@@ -110,7 +110,6 @@ const Dashboard = (props) => {
 
   const gridStyles = useGridStyles();
   const classes = useStyles();
-  // const mediaStyles = useCoverCardMediaStyl/es({ bgPosition: "top" });
 
   return (
     <MotionContext.Provider value={{ robotMotions }}>

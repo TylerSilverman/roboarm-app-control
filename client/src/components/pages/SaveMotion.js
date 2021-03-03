@@ -221,45 +221,48 @@ const SaveMotion = (props) => {
         <Grid item xs>
           <Card elevation={10} className={classes.card2}>
             <CardContent>
-              <Typography variant="body1">
-                Click the trash can icon to delete from the list.
-              </Typography>
-              <ButtonGroup
-                orientation="vertical"
-                color="secondary"
-                aria-label="vertical outlined primary button group"
-              >
-                {favorites.map((motion) => (
-                  <div>
-                    <Button
-                      classes={{
-                        root: classes.root1, // class name, e.g. `classes-nesting-root-x`
-                        label: classes.label, // class name, e.g. `classes-nesting-label-x`
-                      }}
-                      endIcon={<Icon>send</Icon>}
-                      key={motion._id}
-                      channel={motion.motions[0].channel}
-                      pulse={motion.motions[0].pulse}
-                      onClick={motionBtn}
-                    >
-                      {motion.motorLocation} - {motion.direction}
-                    </Button>
-                    <Button
-                      classes={{
-                        root: classes.root2, // class name, e.g. `classes-nesting-root-x`
-                        label: classes.label, // class name, e.g. `classes-nesting-label-x`
-                      }}
-                      startIcon={<DeleteIcon />}
-                      location={motion.motorLocation}
-                      direction={motion.direction}
-                      channel={motion.motions[0].channel}
-                      pulse={motion.motions[0].pulse}
-                      id={motion._id}
-                      onClick={(e) => deleteBtn(e, motion._id)}
-                    />
-                  </div>
-                ))}
-              </ButtonGroup>
+              {!favorites.length ? (
+                <Typography variant="body1">
+                  You currently do not have saved motions.
+                </Typography>
+              ) : (
+                <ButtonGroup
+                  orientation="vertical"
+                  color="secondary"
+                  aria-label="vertical outlined primary button group"
+                >
+                  {favorites.map((motion) => (
+                    <div>
+                      <Button
+                        classes={{
+                          root: classes.root1, // class name, e.g. `classes-nesting-root-x`
+                          label: classes.label, // class name, e.g. `classes-nesting-label-x`
+                        }}
+                        endIcon={<Icon>send</Icon>}
+                        key={motion._id}
+                        channel={motion.motions[0].channel}
+                        pulse={motion.motions[0].pulse}
+                        onClick={motionBtn}
+                      >
+                        {motion.motorLocation} - {motion.direction}
+                      </Button>
+                      <Button
+                        classes={{
+                          root: classes.root2, // class name, e.g. `classes-nesting-root-x`
+                          label: classes.label, // class name, e.g. `classes-nesting-label-x`
+                        }}
+                        startIcon={<DeleteIcon />}
+                        location={motion.motorLocation}
+                        direction={motion.direction}
+                        channel={motion.motions[0].channel}
+                        pulse={motion.motions[0].pulse}
+                        id={motion._id}
+                        onClick={(e) => deleteBtn(e, motion._id)}
+                      />
+                    </div>
+                  ))}
+                </ButtonGroup>
+              )}
             </CardContent>
           </Card>
         </Grid>
