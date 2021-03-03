@@ -1,15 +1,13 @@
 let moogose = require("mongoose");
 let db = require("../models");
 
-// moogose.connect("mongodb://localhost/robotArm_db", {
+require("dotenv").config();
 
-moogose.connect(
-  "mongodb+srv://root:12345@cluster0.cuzc6.mongodb.net/robotArm_db?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useFindAndModify: false,
-  }
-);
+// moogose.connect("mongodb://localhost/robotArm_db", {
+moogose.connect(process.env.MONGO_ATLAS_SEED, {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+});
 
 let robotSeed = [
   {
@@ -117,7 +115,7 @@ let robotSeed = [
     direction: "open",
     motions: [
       {
-        channel: 3,
+        channel: 5,
         pulse: 500,
       },
     ],
@@ -127,7 +125,7 @@ let robotSeed = [
     direction: "close",
     motions: [
       {
-        channel: 3,
+        channel: 5,
         pulse: 1000,
       },
     ],
