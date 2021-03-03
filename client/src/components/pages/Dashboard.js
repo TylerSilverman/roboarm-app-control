@@ -101,10 +101,9 @@ const Dashboard = (props) => {
       .catch((err) => console.log({ err }));
   }, []);
 
-  // Function to grab information from the buttons and send to the motors through socket.io
+  // Function to send the stop message to the motors through socket.io
   const stopBtn = (e) => {
     e.preventDefault();
-    // pwm stands for pulse width modulation. We are passing the pulse in microseconds.
     // Using socket.io for real time communication with the Rasberry Pi.
     socket.emit("pwmstop");
   };
