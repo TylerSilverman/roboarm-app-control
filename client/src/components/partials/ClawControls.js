@@ -89,11 +89,6 @@ function ClawControls() {
   return (
     <Card elevation={10} className={classes.card}>
       <CardContent>
-        <Typography variant="body1">
-          Choose any button to move Robotic Arm.
-          <br></br>
-          Choose the save button to save favorite motions.
-        </Typography>
         <ButtonGroup
           orientation="vertical"
           color="secondary"
