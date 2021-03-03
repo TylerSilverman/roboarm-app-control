@@ -14,7 +14,7 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-import robotImage from "../../assets/roboArm4.png";
+import robotImage from "../../assets/roboArm.png";
 import { io } from "socket.io-client";
 import PanToolRoundedIcon from "@material-ui/icons/PanToolRounded";
 
