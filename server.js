@@ -71,6 +71,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("pwmstop", () => {
-    io.sockets.emit("pwmpulse");
+    io.sockets.emit("pwmstop");
   });
 });
