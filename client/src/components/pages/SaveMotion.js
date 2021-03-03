@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Store } from "../../store";
 import API from "../../utils/apiHelper";
 import { makeStyles } from "@material-ui/core/styles";
-import robotImage from "../../assets/roboArm4.png";
+import robotImage from "../../assets/roboArm.png";
 import MotionContext from "../../utils/motionContext";
 import {
   Icon,
@@ -18,7 +18,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-
 
 const useGridStyles = makeStyles(({ breakpoints }) => ({
   root: {
@@ -118,82 +117,85 @@ const SaveMotion = (props) => {
 
   return (
     <MotionContext.Provider value={{ favorites }}>
-    <Container>
-      <Grid
-        container
-        style={{ padding: 16 }}
-        classes={gridStyles}
-        spacing={2}
-      />
-      <Grid item xs>
-        <Box m="25px">
-          <Paper elevation={10} className={classes.paper} justify="center">
-            <Typography variant="h4" align="center">
-              <b>Saved Motions</b>
-            </Typography>
-          </Paper>
-        </Box>
-      </Grid>
-      <br></br><br></br><br></br>
-      <Grid container direction="col" item xs>
-        <Card elevation={10} className={classes.card}>
-          <CardMedia
-            component="img"
-            title="Robot Claw"
-            alt="Robot Claw"
-            image={robotImage}
-          />
-        </Card>
-        <Grid item>
-          <br></br>
-          <Card>
-            <p>Click the trash can icon to delete from the list</p>
-            <CardContent>
-              <ButtonGroup
-                padding="50px"
-                orientation="vertical"
-                color="secondary"
-                aria-label="vertical button"
-              >
-                {favorites.map((motion) => (
-                  <div> 
-                    <Button
-                      classes={{
-                        root: classes.root, // class name, e.g. `classes-nesting-root-x`
-                        label: classes.label, // class name, e.g. `classes-nesting-label-x`
-                      }}
-                      endIcon={<Icon>send</Icon>}
-                      key={motion._id}
-                      // direction={motion.motions}
-                      channel={motion.motions[0].channel}
-                      pulse={motion.motions[0].pulse}
-                      onClick={motionBtn}
-                    >
-                      {motion.motorLocation} - {motion.direction}
-                    </Button>
-                    <Button
-                      classes={{
-                        root: classes.root, // class name, e.g. `classes-nesting-root-x`
-                        label: classes.label, // class name, e.g. `classes-nesting-label-x`
-                      }}
-                      startIcon={<DeleteIcon />}
-                      location={motion.motorLocation}
-                      direction={motion.direction}
-                      channel={motion.motions[0].channel}
-                      pulse={motion.motions[0].pulse}
-                      id={motion._id}
-                      onClick={(e) => deleteBtn(e, motion._id)}
-                    />
-                  </div>
-                ))}
-                 <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
-              </ButtonGroup>
-            </CardContent>
-          </Card>
+      <Container>
+        <Grid
+          container
+          style={{ padding: 16 }}
+          classes={gridStyles}
+          spacing={2}
+        />
+        <Grid item xs>
+          <Box m="25px">
+            <Paper elevation={10} className={classes.paper} justify="center">
+              <Typography variant="h4" align="center">
+                <b>Saved Motions</b>
+              </Typography>
+            </Paper>
+          </Box>
         </Grid>
-      </Grid>
-    </Container>
-     </MotionContext.Provider>
+        <br></br>
+        <br></br>
+        <br></br>
+        <Grid container direction="col" item xs>
+          <Card elevation={10} className={classes.card}>
+            <CardMedia
+              component="img"
+              title="Robot Claw"
+              alt="Robot Claw"
+              image={robotImage}
+            />
+          </Card>
+          <Grid item>
+            <br></br>
+            <Card>
+              <p>Click the trash can icon to delete from the list</p>
+              <CardContent>
+                <ButtonGroup
+                  padding="50px"
+                  orientation="vertical"
+                  color="secondary"
+                  aria-label="vertical button"
+                >
+                  {favorites.map((motion) => (
+                    <div>
+                      <Button
+                        classes={{
+                          root: classes.root, // class name, e.g. `classes-nesting-root-x`
+                          label: classes.label, // class name, e.g. `classes-nesting-label-x`
+                        }}
+                        endIcon={<Icon>send</Icon>}
+                        key={motion._id}
+                        // direction={motion.motions}
+                        channel={motion.motions[0].channel}
+                        pulse={motion.motions[0].pulse}
+                        onClick={motionBtn}
+                      >
+                        {motion.motorLocation} - {motion.direction}
+                      </Button>
+                      <Button
+                        classes={{
+                          root: classes.root, // class name, e.g. `classes-nesting-root-x`
+                          label: classes.label, // class name, e.g. `classes-nesting-label-x`
+                        }}
+                        startIcon={<DeleteIcon />}
+                        location={motion.motorLocation}
+                        direction={motion.direction}
+                        channel={motion.motions[0].channel}
+                        pulse={motion.motions[0].pulse}
+                        id={motion._id}
+                        onClick={(e) => deleteBtn(e, motion._id)}
+                      />
+                    </div>
+                  ))}
+                  <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>{" "}
+                  <br></br> <br></br> <br></br> <br></br> <br></br>
+                </ButtonGroup>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Container>
+    </MotionContext.Provider>
   );
 };
 
