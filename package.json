@@ -1,8 +1,12 @@
 {
     "version": "1.0.0",
-    "name": "mern-passport-template",
+    "name": "roboarm-app-control",
+    "author": {
+        "name": "Camila Alves Meyer and Tyler Silverman"
+    },
     "license": "MIT",
-    "description": "Starter MERN application with Passport user authentication using JSON Web Tokens.",
+    "description": "RoboArm is a web app that allows the user to remote control a robot claw from anywhere with internet connectivity.",
+    "repository": "https://github.com/Mimila-85/roboarm-app-control",
     "main": "server.js",
     "scripts": {
         "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",

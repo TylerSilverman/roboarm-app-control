@@ -1,11 +1,13 @@
 {
-  "name": "roboArm",
-  "version": "0.2.1",
-  "main": "pca_server.js",
+  "version": "1.0.0",
+  "name": "roboarm-app-control",
   "author": {
-    "name": "Camila and Tyler"
+    "name": "Camila Alves Meyer and Tyler Silverman"
   },
-  "description": "roboArm app control",
+  "license": "MIT",
+  "description": "RoboArm is a web app that allows the user to remote control a robot claw from anywhere with internet connectivity.",
+  "repository": "https://github.com/Mimila-85/roboarm-app-control",
+  "main": "pca_server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
@@ -22,9 +24,6 @@
     "socket.io-client": "^3.1.1",
     "utf-8-validate": "^5.0.3"
   },
-  "repository": "https://github.com/Mimila-85/roboarm-app-control",
-  "license": "MIT",
-  "readme": "README.txt",
   "devDependencies": {
     "coffee-script": "^1.12.7",
     "coffeescript": "^2.5.1"
